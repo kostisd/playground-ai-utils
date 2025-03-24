@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual Environments
+.venv/
+env/
+venv/
+
+# Jupyter/Colab
+.ipynb_checkpoints/
+*.ipynb
+
+# Data
+*.csv
+*.tsv
+*.parquet
+*.xlsx
+*.db
+
+# Environment Variables
+.env
+
+# VSCode & other IDEs
+.vscode/
+*.code-workspace
+
+# MacOS / system files
+.DS_Store
+Thumbs.db
+
