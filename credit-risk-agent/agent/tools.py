@@ -1,10 +1,10 @@
 from langchain.tools import Tool
-from agent.query_supabase import query_supabase
+from query_supabase import query_supabase
 
 # Define LangChain tool
 supabase_sql_tool = Tool(
     name="Supabase SQL Query Tool",
-    func = query_database,
+    func = query_supabase,
     description = (
         "Use this tool to run SQL queries on the credit risk dataset. "
         "Only use this tool when you need to answer questions that require data from the database. "
