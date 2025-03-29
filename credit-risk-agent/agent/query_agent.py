@@ -1,8 +1,12 @@
 import os
 from dotenv import load_dotenv
 from langchain.agents import initialize_agent, AgentType
-from langchain.chat_models import ChatOpenAI
-from agent.tools import supabase_sql_tool
+from langchain_openai import ChatOpenAI
+from tools import supabase_sql_tool
+from prompts import query_prefix
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning, module="langchain")
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -15,8 +19,8 @@ tools = [supabase_sql_tool]
 agent = initialize_agent(
     tools,
     llm,
-    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    verbose=False
+    agent_kwargs={"prefix": query_prefix},
+    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION
 )
 
 def main():
@@ -25,7 +29,7 @@ def main():
         query = input(">")
         if query.lower() in {"exit", "quit"}:
             break
-        response = agent.run(query)
+        response = agent.invoke(query)
         print(f"{response}\n")
 
 if __name__ == "__main__":
